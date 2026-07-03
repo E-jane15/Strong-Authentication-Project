@@ -46,6 +46,14 @@ public class HomeController {
 
         model.addAttribute("username", authentication.getName());
 
+        model.addAttribute(
+                "role",
+                authentication.getAuthorities()
+                        .iterator()
+                        .next()
+                        .getAuthority()
+        );
+
         return "dashboard";
     }
 }

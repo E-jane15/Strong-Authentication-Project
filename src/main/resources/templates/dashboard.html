@@ -17,7 +17,9 @@
     <h1>Authentication Successful</h1>
 
     <h2 th:text="'Welcome ' + ${username}"></h2>
+    <h3>Your Role:</h3>
 
+    <p th:text="${role}"></p>
     <p>
 
         You have successfully logged into the application.
@@ -27,7 +29,7 @@
     <br>
 
     <a href="/">Logout</a>
-
+/
 </div>
 
 </body>

@@ -31,7 +31,11 @@ public class UserService {
         );
 
         // Default role for every new user
-        user.setRole("ROLE_USER");
+        // Assign selected role.
+// If no role was selected, default to ROLE_USER.
+        if (user.getRole() == null || user.getRole().isBlank()) {
+            user.setRole("ROLE_USER");
+        }
 
         repository.save(user);
 
