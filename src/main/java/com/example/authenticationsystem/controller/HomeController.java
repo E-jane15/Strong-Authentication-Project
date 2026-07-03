@@ -1,5 +1,7 @@
 package com.example.authenticationsystem.controller;
 
+import com.example.authenticationsystem.entity.User;
+import com.example.authenticationsystem.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -7,53 +9,61 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class HomeController {
 
+    private final UserService service;
+
+    public HomeController(UserService service){
+        this.service=service;
+    }
+
     @GetMapping("/")
-    public String loginPage() {
+    public String loginPage(){
         return "login";
     }
 
+    @GetMapping("/register")
+    public String registerPage(){
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String register(User user,
+                           Model model){
+
+        String response = service.register(user);
+
+        if(response.equals("SUCCESS")){
+
+            model.addAttribute("message",
+                    "Registration Successful. Login below.");
+
+            return "login";
+        }
+
+        model.addAttribute("message",response);
+
+        return "register";
+    }
+
     @PostMapping("/login")
-    public String login(
-            @RequestParam String username,
-            @RequestParam String password,
-            Model model) {
+    public String login(@RequestParam String username,
+                        @RequestParam String password,
+                        Model model){
 
-        if (
-                username.equals("admin") &&
-                        password.equals("admin123")
-        ) {
+        User user = service.login(username,password);
 
-            model.addAttribute("username", "Administrator");
+        if(user==null){
 
-            return "dashboard";
+            model.addAttribute("message",
+                    "Invalid Username or Password");
+
+            return "login";
         }
 
-        if (
-                username.equals("john") &&
-                        password.equals("john123")
-        ) {
+        model.addAttribute("username",
+                user.getFullName());
 
-            model.addAttribute("username", "John");
+        return "dashboard";
 
-            return "dashboard";
-        }
-
-        if (
-                username.equals("mary") &&
-                        password.equals("mary123")
-        ) {
-
-            model.addAttribute("username", "Mary");
-
-            return "dashboard";
-        }
-
-        model.addAttribute(
-                "message",
-                "Invalid Username or Password"
-        );
-
-        return "login";
     }
 
 }

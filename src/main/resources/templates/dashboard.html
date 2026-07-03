@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"n>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
     <title>Dashboard</title>
 
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
 
 </head>
 
@@ -13,19 +14,17 @@
 
 <div class="container">
 
-    <h1>🎉 Login Successful</h1>
+    <h1>Authentication Successful</h1>
 
-    <br>
+    <h2 th:text="'Welcome '+${username}"></h2>
 
-    <h2 th:text="'Welcome, ' + ${username}"></h2>
+    <p>
 
-    <br>
-
-    <p class="success">
-
-        You have successfully logged into the system.
+        You have successfully logged into the application.
 
     </p>
+
+    <br>
 
     <a href="/">Logout</a>
 
