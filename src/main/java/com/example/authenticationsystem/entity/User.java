@@ -84,4 +84,14 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
+    @Column
+    private String totpSecret;
+    public String getTotpSecret() {
+        return totpSecret;
+    }
+
+    public void setTotpSecret(String totpSecret) {
+        this.totpSecret = totpSecret;
+    }
 }

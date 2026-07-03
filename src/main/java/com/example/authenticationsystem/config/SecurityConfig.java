@@ -45,30 +45,24 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/",
                                 "/register",
-                                "/css/**",
-                                "/api/login"
+                                "/setup-authenticator",
+                                "/verify-otp",
+                                "/verify-totp",
+                                "/css/**"
                         ).permitAll()
 
                         .anyRequest().authenticated()
                 )
 
                 .formLogin(form -> form
-
                         .loginPage("/")
-
                         .loginProcessingUrl("/login")
-
-                        .defaultSuccessUrl("/dashboard", true)
-
+                        .defaultSuccessUrl("/verify-totp", true)
                         .failureUrl("/?error")
-
-                        .permitAll()
-                )
+                        .permitAll())
 
                 .logout(logout -> logout
-
                         .logoutSuccessUrl("/")
-
                         .permitAll());
 
         return http.build();

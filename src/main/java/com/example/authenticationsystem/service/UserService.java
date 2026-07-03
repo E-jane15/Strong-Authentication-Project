@@ -10,12 +10,15 @@ public class UserService {
 
     private final UserRepository repository;
     private final BCryptPasswordEncoder encoder;
+    private final TotpService totpService;
 
     public UserService(UserRepository repository,
-                       BCryptPasswordEncoder encoder) {
+                       BCryptPasswordEncoder encoder,
+                       TotpService totpService) {
 
         this.repository = repository;
         this.encoder = encoder;
+        this.totpService = totpService;
     }
 
     public String register(User user){
@@ -36,6 +39,7 @@ public class UserService {
         if (user.getRole() == null || user.getRole().isBlank()) {
             user.setRole("ROLE_USER");
         }
+        user.setTotpSecret(totpService.generateSecret());
 
         repository.save(user);
 
@@ -55,5 +59,11 @@ public class UserService {
             return user;
 
         return null;
+    }
+
+    public User findByUsername(String username) {
+
+        return repository.findByUsername(username).orElse(null);
+
     }
 }
