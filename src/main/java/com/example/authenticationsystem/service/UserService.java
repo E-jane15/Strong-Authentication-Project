@@ -30,12 +30,15 @@ public class UserService {
                 encoder.encode(user.getPassword())
         );
 
+        // Default role for every new user
+        user.setRole("ROLE_USER");
+
         repository.save(user);
 
         return "SUCCESS";
     }
 
-    public User login(String username,String password){
+    public User login(String username, String password){
 
         var optionalUser = repository.findByUsername(username);
 
@@ -44,10 +47,9 @@ public class UserService {
 
         User user = optionalUser.get();
 
-        if(encoder.matches(password,user.getPassword()))
+        if(encoder.matches(password, user.getPassword()))
             return user;
 
         return null;
     }
-
 }

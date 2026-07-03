@@ -47,6 +47,14 @@
 
     </a>
 
+    <p class="message" th:if="${param.error}">
+        Invalid username or password.
+    </p>
+
+    <p class="success" th:if="${param.registered}">
+        Registration successful! Please login.
+    </p>
+
     <p class="message" th:text="${message}"></p>
 
 </div>
