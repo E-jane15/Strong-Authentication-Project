@@ -1,5 +1,7 @@
 package com.example.authenticationsystem.controller;
 
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import com.example.authenticationsystem.entity.User;
 import com.example.authenticationsystem.service.EmailService;
 import com.example.authenticationsystem.service.OtpService;
@@ -141,10 +143,29 @@ public class HomeController {
     public String dashboard(Authentication authentication,
                             Model model) {
 
-        String username = authentication.getName();
+        String username;
 
-        if (!twoFactorService.isVerified(username)) {
-            return "redirect:/verify-totp";
+        if (authentication instanceof OAuth2AuthenticationToken oauthToken) {
+
+            OAuth2User oauthUser = oauthToken.getPrincipal();
+
+            username = oauthUser.getAttribute("preferred_username");
+
+            if (username == null) {
+                username = oauthUser.getAttribute("email");
+            }
+
+            if (username == null) {
+                username = oauthUser.getName();
+            }
+
+        } else {
+
+            username = authentication.getName();
+
+            if (!twoFactorService.isVerified(username)) {
+                return "redirect:/verify-totp";
+            }
         }
 
         model.addAttribute("username", username);
@@ -159,7 +180,6 @@ public class HomeController {
 
         return "dashboard";
     }
-
     @GetMapping("/setup-authenticator")
     public String setupAuthenticatorPage() {
         return "setup-authenticator";

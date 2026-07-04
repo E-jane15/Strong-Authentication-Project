@@ -7,9 +7,9 @@
 
 body{
 
-    background:linear-gradient(135deg,#1e3c72,#2a5298);
+    background:linear-gradient(135deg,#0f172a,#2563eb);
 
-    height:100vh;
+    min-height:100vh;
 
     display:flex;
 
@@ -21,15 +21,15 @@ body{
 
 .container{
 
-    width:380px;
+    width:420px;
 
-    background:white;
+    background:#ffffff;
 
-    padding:40px;
+    padding:45px;
 
-    border-radius:15px;
+    border-radius:18px;
 
-    box-shadow:0 15px 30px rgba(0,0,0,.3);
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
 
     text-align:center;
 
@@ -37,19 +37,19 @@ body{
 
 h1{
 
-    color:#1e3c72;
+    color:#1e3a8a;
 
     margin-bottom:10px;
 
+    font-size:30px;
+
 }
 
-h2{
+.container p:first-of-type{
 
     color:#666;
 
-    margin-bottom:25px;
-
-    font-weight:normal;
+    margin-bottom:30px;
 
 }
 
@@ -57,15 +57,17 @@ input{
 
     width:100%;
 
-    padding:14px;
+    padding:15px;
 
     margin-bottom:18px;
 
-    border:1px solid #ccc;
+    border:1px solid #d1d5db;
 
-    border-radius:8px;
+    border-radius:10px;
 
     font-size:15px;
+
+    transition:.3s;
 
 }
 
@@ -73,7 +75,9 @@ input:focus{
 
     outline:none;
 
-    border-color:#1e3c72;
+    border-color:#2563eb;
+
+    box-shadow:0 0 8px rgba(37,99,235,.2);
 
 }
 
@@ -81,17 +85,19 @@ button{
 
     width:100%;
 
-    padding:14px;
+    padding:15px;
 
-    background:#1e3c72;
+    background:#2563eb;
 
     color:white;
 
     border:none;
 
-    border-radius:8px;
+    border-radius:10px;
 
     font-size:16px;
+
+    font-weight:bold;
 
     cursor:pointer;
 
@@ -101,19 +107,78 @@ button{
 
 button:hover{
 
-    background:#16335f;
+    background:#1d4ed8;
+
+}
+
+.divider{
+
+    display:flex;
+
+    align-items:center;
+
+    margin:28px 0;
+
+}
+
+.divider::before,
+.divider::after{
+
+    content:"";
+
+    flex:1;
+
+    height:1px;
+
+    background:#d1d5db;
+
+}
+
+.divider span{
+
+    margin:0 12px;
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+.keycloak-btn{
+
+    display:block;
+
+    width:100%;
+
+    background:#111827;
+
+    color:white;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.keycloak-btn:hover{
+
+    background:#374151;
+
+    color:white;
 
 }
 
 a{
 
-    display:inline-block;
-
-    margin-top:20px;
-
     text-decoration:none;
 
-    color:#1e3c72;
+    color:#2563eb;
 
     font-weight:bold;
 
@@ -121,15 +186,15 @@ a{
 
 a:hover{
 
-    color:#2a5298;
+    color:#1d4ed8;
 
 }
 
 .message{
 
-    color:red;
+    color:#dc2626;
 
-    margin-top:15px;
+    margin-top:18px;
 
     font-weight:bold;
 
@@ -137,8 +202,10 @@ a:hover{
 
 .success{
 
-    color:green;
+    color:#16a34a;
 
-    margin-top:15px;
+    margin-top:18px;
+
+    font-weight:bold;
 
 }
